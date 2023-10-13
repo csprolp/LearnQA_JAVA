@@ -3,7 +3,6 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLOutput;
 import java.util.LinkedHashMap;
 import java.util.List;
 
