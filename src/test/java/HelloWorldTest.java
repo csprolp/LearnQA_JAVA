@@ -7,7 +7,7 @@ public class HelloWorldTest {
     public void testHelloWorld(){
         Response response = RestAssured
                 //.get("https://playground.learnqa.ru/api/hello") было в примере
-                .get("https://playground.learnqa.ru/api/get_text")
+                .get("https://playground.learnqa.ru/api/get_json_homework")
                 .andReturn();
         response.prettyPrint();
     }
