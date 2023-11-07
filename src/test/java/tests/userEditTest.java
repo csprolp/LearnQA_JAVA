@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-@Epic("Edit classes")
+@Epic("CRUD")
 @Feature("Edit")
 public class userEditTest extends BaseTestCase {
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
@@ -112,6 +112,7 @@ public class userEditTest extends BaseTestCase {
         editData.put("firstName", firstName);
 
         Response responseEditUser = apiCoreRequests.makePutRequestForEdit("https://playground.learnqa.ru/api/user/" + userId, editData, getHeader(responseGetAuth, "x-csrf-token"), getCookie(responseGetAuth, "auth_sid"));
+
         Assertions.AssertJsonByName(responseEditUser, "error", "Too short value for field firstName");
         Assertions.AssertResponseCodeEquals(responseEditUser, 400);
     }

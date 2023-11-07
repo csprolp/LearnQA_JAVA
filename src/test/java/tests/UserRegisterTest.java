@@ -17,7 +17,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.HashMap;
 import java.util.Map;
 
-@Epic("Register classes")
+@Epic("CRUD")
 @Feature("Registration")
 public class UserRegisterTest extends BaseTestCase {
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();

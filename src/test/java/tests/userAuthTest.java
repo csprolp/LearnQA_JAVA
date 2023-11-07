@@ -22,7 +22,7 @@ import lib.ApiCoreRequests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Epic("Authorization classes")
+@Epic("CRUD")
 @Feature("Authorization")
 public class userAuthTest extends BaseTestCase {
     String cookie;

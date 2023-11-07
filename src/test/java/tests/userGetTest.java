@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-@Epic("Get info classes")
+@Epic("CRUD")
 @Feature("Get info")
 public class userGetTest extends BaseTestCase {
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
