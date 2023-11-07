@@ -10,6 +10,7 @@ import lib.Assertions;
 import lib.BaseTestCase;
 import lib.DataGenerator;
 import org.junit.jupiter.api.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,11 +18,12 @@ import java.util.Map;
 @Feature("Edit")
 public class userEditTest extends BaseTestCase {
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
+
     @Test
     public void testEditWithoutAuth() {
 //Generate User
         Map<String, String> userData = DataGenerator.getRegistrationData();
-        Response responseCreateAuth = apiCoreRequests.makePostRequestForRegister("https://playground.learnqa.ru/api/user/",userData);
+        Response responseCreateAuth = apiCoreRequests.makePostRequestForRegister("https://playground.learnqa.ru/api/user/", userData);
         String userId = getStringFromJson(responseCreateAuth, "id");
 
         //Edit
@@ -29,7 +31,7 @@ public class userEditTest extends BaseTestCase {
         Map<String, String> editData = new HashMap<>();
         editData.put("firstName", newName);
 
-        Response editResponse = apiCoreRequests.makePutRequestForEdit("https://playground.learnqa.ru/api/user/"+userId, editData);
+        Response editResponse = apiCoreRequests.makePutRequestForEdit("https://playground.learnqa.ru/api/user/" + userId, editData);
         Assertions.AssertResponseTextEquals(editResponse, "Auth token not supplied");
         Assertions.AssertResponseCodeEquals(editResponse, 400);
 
@@ -39,7 +41,7 @@ public class userEditTest extends BaseTestCase {
     public void testEditWithAuthByAnotherUser() {
 //Generate User
         Map<String, String> userData = DataGenerator.getRegistrationData();
-        Response responseCreateAuth = apiCoreRequests.makePostRequestForRegister("https://playground.learnqa.ru/api/user/",userData);
+        Response responseCreateAuth = apiCoreRequests.makePostRequestForRegister("https://playground.learnqa.ru/api/user/", userData);
         String userId = getStringFromJson(responseCreateAuth, "id");
 
         Map<String, String> authData = new HashMap<>();
@@ -54,7 +56,7 @@ public class userEditTest extends BaseTestCase {
         Map<String, String> editData = new HashMap<>();
         editData.put("firstName", newName);
 
-        Response editResponse = apiCoreRequests.makePutRequestForEdit("https://playground.learnqa.ru/api/user/"+userId, editData,header,cookie);
+        Response editResponse = apiCoreRequests.makePutRequestForEdit("https://playground.learnqa.ru/api/user/" + userId, editData, header, cookie);
         System.out.println(editResponse.statusCode());
         System.out.println(editResponse.asString());
         //We don't know a correct error
@@ -68,7 +70,7 @@ public class userEditTest extends BaseTestCase {
     public void testEditWithIncorrectEmailTest() {
 //Generate User
         Map<String, String> userData = DataGenerator.getRegistrationData();
-        Response responseCreateAuth = apiCoreRequests.makePostRequestForRegister("https://playground.learnqa.ru/api/user/",userData);
+        Response responseCreateAuth = apiCoreRequests.makePostRequestForRegister("https://playground.learnqa.ru/api/user/", userData);
         String userId = getStringFromJson(responseCreateAuth, "id");
 
         //Login
@@ -84,7 +86,7 @@ public class userEditTest extends BaseTestCase {
         Map<String, String> editData = new HashMap<>();
         editData.put("email", newEmail);
 
-        Response responseEditUser = apiCoreRequests.makePutRequestForEdit("https://playground.learnqa.ru/api/user/"+userId, editData, getHeader(responseGetAuth, "x-csrf-token"), getCookie(responseGetAuth, "auth_sid"));
+        Response responseEditUser = apiCoreRequests.makePutRequestForEdit("https://playground.learnqa.ru/api/user/" + userId, editData, getHeader(responseGetAuth, "x-csrf-token"), getCookie(responseGetAuth, "auth_sid"));
         Assertions.AssertResponseTextEquals(responseEditUser, "Invalid email format");
         Assertions.AssertResponseCodeEquals(responseEditUser, 400);
     }
@@ -93,7 +95,7 @@ public class userEditTest extends BaseTestCase {
     public void testEditWithIncorrectFirstNameTest() {
 //Generate User
         Map<String, String> userData = DataGenerator.getRegistrationData();
-        Response responseCreateAuth = apiCoreRequests.makePostRequestForRegister("https://playground.learnqa.ru/api/user/",userData);
+        Response responseCreateAuth = apiCoreRequests.makePostRequestForRegister("https://playground.learnqa.ru/api/user/", userData);
         String userId = getStringFromJson(responseCreateAuth, "id");
 
         //Login
@@ -109,7 +111,7 @@ public class userEditTest extends BaseTestCase {
         Map<String, String> editData = new HashMap<>();
         editData.put("firstName", firstName);
 
-        Response responseEditUser = apiCoreRequests.makePutRequestForEdit("https://playground.learnqa.ru/api/user/"+userId, editData, getHeader(responseGetAuth, "x-csrf-token"), getCookie(responseGetAuth, "auth_sid"));
+        Response responseEditUser = apiCoreRequests.makePutRequestForEdit("https://playground.learnqa.ru/api/user/" + userId, editData, getHeader(responseGetAuth, "x-csrf-token"), getCookie(responseGetAuth, "auth_sid"));
         Assertions.AssertJsonByName(responseEditUser, "error", "Too short value for field firstName");
         Assertions.AssertResponseCodeEquals(responseEditUser, 400);
     }
