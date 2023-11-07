@@ -1,11 +1,11 @@
 package tests;
 
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lib.BaseTestCase;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import lib.Assertions;
@@ -13,10 +13,6 @@ import lib.Assertions;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import org.junit.jupiter.api.DisplayName;
 import lib.ApiCoreRequests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,6 +43,8 @@ public class userAuthTest extends BaseTestCase {
     @Test
     @Description("This test successfully authorize user by email and password")
     @DisplayName("Test Positive Auth User")
+    @Severity(SeverityLevel.BLOCKER)
+    @Tags({@Tag("Auth"), @Tag("Regression")})
     public void testAuthUser() {
         Response responceCheckAuth = apiCoreRequests
                 .makeGetRequest(
@@ -60,6 +58,8 @@ public class userAuthTest extends BaseTestCase {
 
     @Description("This test checks authorization status w/o sending auth cookie or token")
     @DisplayName("Test negative auth user")
+    @Severity(SeverityLevel.CRITICAL)
+    @Tags({@Tag("Auth"), @Tag("Regression")})
     @ParameterizedTest
     @ValueSource(strings = {"headers", "cookies"})
     public void testNegativeAuthUser(String condition) {

@@ -1,14 +1,14 @@
 package tests;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lib.Assertions;
 import lib.BaseTestCase;
 import lib.DataGenerator;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import lib.ApiCoreRequests;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -70,6 +70,8 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Description("This test checks registration  w/o necessary field")
     @DisplayName("Test negative reg user")
+    @Severity(SeverityLevel.CRITICAL)
+    @Tags({@Tag("Create"), @Tag("Regression")})
     @ParameterizedTest
     @ValueSource(strings = {"username", "firstName", "lastName", "email", "password"})
     public void testCreateUserWithOutNecessaryFields(String condition) {
@@ -85,6 +87,8 @@ public class UserRegisterTest extends BaseTestCase {
     }
     @Description("This test checks registration  with incorrect username, long or short")
     @DisplayName("Test negative reg user")
+    @Severity(SeverityLevel.MINOR)
+    @Tags({@Tag("Create"), @Tag("Regression")})
     @ParameterizedTest
     @ValueSource(strings = {"long", "short"})
     public void testCreateUserWithIncorrectUsername(String condition) {

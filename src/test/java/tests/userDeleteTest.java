@@ -1,14 +1,14 @@
 package tests;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lib.ApiCoreRequests;
 import lib.Assertions;
 import lib.BaseTestCase;
 import lib.DataGenerator;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -23,6 +23,8 @@ public class userDeleteTest extends BaseTestCase {
     @Test
     @Description("This test successfully delete a created user")
     @DisplayName("Test Positive Delete User")
+    @Severity(SeverityLevel.CRITICAL)
+    @Tags({@Tag("Delete"), @Tag("Regression")})
     public void testDeleteCreatedUser() {
 
         //Generate User
@@ -49,6 +51,8 @@ public class userDeleteTest extends BaseTestCase {
     @Test
     @Description("This test unsuccessfully delete a Admin user")
     @DisplayName("Test Negative Delete Admin User")
+    @Severity(SeverityLevel.NORMAL)
+    @Tags({@Tag("Delete"), @Tag("Regression")})
     public void testDeleteAdminUser() {
         Map<String, String> authData = new HashMap<>();
         authData.put("email", "vinkotov@example.com");
@@ -65,6 +69,8 @@ public class userDeleteTest extends BaseTestCase {
     @Test
     @Description("This test unsuccessfully delete a created user by another user")
     @DisplayName("Test Negative Delete User by another User")
+    @Severity(SeverityLevel.NORMAL)
+    @Tags({@Tag("Delete"), @Tag("Regression")})
     public void testDeleteCreatedByAnotherUser() {
 
         //Generate User

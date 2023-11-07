@@ -1,13 +1,15 @@
 package tests;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lib.ApiCoreRequests;
 import lib.Assertions;
 import lib.BaseTestCase;
 import lib.DataGenerator;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -53,6 +55,10 @@ public class userGetTest extends BaseTestCase {
         Assertions.AssertJsonHasFields(responseUserData, expectedFields);
     }
 
+    @Description("This test tried to get a info of another user")
+    @DisplayName("Test negative to get info by anotherr User")
+    @Severity(SeverityLevel.CRITICAL)
+    @Tags({@Tag("GET"), @Tag("Regression")})
     @Test
     public void testGetUserInfoByAnotherUser() {
         Map<String, String> userData = DataGenerator.getRegistrationData();

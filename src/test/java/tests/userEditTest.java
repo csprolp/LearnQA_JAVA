@@ -1,7 +1,6 @@
 package tests;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -9,6 +8,9 @@ import lib.ApiCoreRequests;
 import lib.Assertions;
 import lib.BaseTestCase;
 import lib.DataGenerator;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -19,6 +21,10 @@ import java.util.Map;
 public class userEditTest extends BaseTestCase {
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
 
+    @Description("This test tried to edit w/o auth")
+    @DisplayName("Test Edit  User w/o auth")
+    @Severity(SeverityLevel.NORMAL)
+    @Tags({@Tag("Edit"), @Tag("Regression")})
     @Test
     public void testEditWithoutAuth() {
 //Generate User
@@ -37,6 +43,10 @@ public class userEditTest extends BaseTestCase {
 
     }
 
+    @Description("This test tried to edit info of another user")
+    @DisplayName("Test Edit info of another User")
+    @Severity(SeverityLevel.NORMAL)
+    @Tags({@Tag("Edit"), @Tag("Regression")})
     @Test
     public void testEditWithAuthByAnotherUser() {
 //Generate User
@@ -65,7 +75,10 @@ public class userEditTest extends BaseTestCase {
 
     }
 
-
+    @Description("This test tried to edit user with change to incorrect email")
+    @DisplayName("Test edit with incorrect email User")
+    @Severity(SeverityLevel.MINOR)
+    @Tags({@Tag("Edit"), @Tag("Regression")})
     @Test
     public void testEditWithIncorrectEmailTest() {
 //Generate User
@@ -91,6 +104,10 @@ public class userEditTest extends BaseTestCase {
         Assertions.AssertResponseCodeEquals(responseEditUser, 400);
     }
 
+    @Description("This test edit user field to incorrect first name")
+    @DisplayName("Test Edit with incorrect first name User")
+    @Severity(SeverityLevel.TRIVIAL)
+    @Tags({@Tag("Edit"), @Tag("Regression")})
     @Test
     public void testEditWithIncorrectFirstNameTest() {
 //Generate User
