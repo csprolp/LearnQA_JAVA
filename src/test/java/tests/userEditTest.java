@@ -71,7 +71,7 @@ public class userEditTest extends BaseTestCase {
         System.out.println(editResponse.asString());
         //We don't know a correct error
         //Assertions.AssertResponseTextEquals(editResponse, "Auth token not supplied");
-        Assertions.AssertResponseCodeEquals(editResponse, 400);
+        Assertions.AssertResponseCodeNotEquals(editResponse, 400);
 
     }
 

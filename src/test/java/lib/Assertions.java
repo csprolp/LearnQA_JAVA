@@ -4,6 +4,7 @@ import io.restassured.response.Response;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class Assertions {
     public static void AssertJsonByName(Response response, String name, int expectedValue) {
@@ -27,17 +28,17 @@ public class Assertions {
 
     }
 
-    public static void AssertResponseTextWithPrettyPrintEquals(Response response, String expectedAnwser) {
-        assertEquals(
-                expectedAnwser,
-                response.prettyPrint(),
-                "Response text is not as expected"
-        );
-
-    }
 
     public static void AssertResponseCodeEquals(Response response, int expectedStatusCode) {
         assertEquals(
+                expectedStatusCode,
+                response.statusCode(),
+                "Response status code is not as expected"
+        );
+    }
+
+    public static void AssertResponseCodeNotEquals(Response response, int expectedStatusCode) {
+        assertNotEquals(
                 expectedStatusCode,
                 response.statusCode(),
                 "Response status code is not as expected"
