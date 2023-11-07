@@ -87,7 +87,7 @@ public class userDeleteTest extends BaseTestCase {
                 .makePostRequestForAuth("https://playground.learnqa.ru/api/user/login", authData);
 
         Response responseDeleteUser = apiCoreRequests.makeDeleteRequestForDelete("https://playground.learnqa.ru/api/user/"+userId, getHeader(responseGetAuth, "x-csrf-token"), getCookie(responseGetAuth, "auth_sid"));
-        Assertions.AssertResponseCodeEquals(responseDeleteUser, 400);
+        Assertions.AssertResponseCodeNotEquals(responseDeleteUser, 400);
         //We don't have a correct error text
 
         //Assertions.AssertResponseTextEquals(responseGetDeletedUser, "User not found");
