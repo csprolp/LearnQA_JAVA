@@ -25,6 +25,14 @@ public class Assertions {
                 "Response text is not as expected"
         );
 
+    }
+
+    public static void AssertResponseTextWithPrettyPrintEquals(Response response, String expectedAnwser) {
+        assertEquals(
+                expectedAnwser,
+                response.prettyPrint(),
+                "Response text is not as expected"
+        );
 
     }
 

@@ -47,6 +47,8 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
+
+
     @Step("Make a post request for Registration")
     public Response makePostRequestForRegister(String url, Map<String, String> registerData) {
         return given()
@@ -61,6 +63,25 @@ public class ApiCoreRequests {
         return given()
                 .filter(new AllureRestAssured())
                 .get(url + id)
+                .andReturn();
+    }
+    @Step("Make a PUT request for Edit without auth")
+    public Response makePutRequestForEdit(String url, Map<String, String> editData) {
+        return given()
+                .filter(new AllureRestAssured())
+                .body(editData)
+                .put(url)
+                .andReturn();
+    }
+
+    @Step("Make a PUT request for Edit")
+    public Response makePutRequestForEdit(String url, Map<String, String> editData,String header, String cookie) {
+        return given()
+                .filter(new AllureRestAssured())
+                .header("x-csrf-token", header)
+                .cookie("auth_sid", cookie)
+                .body(editData)
+                .put(url)
                 .andReturn();
     }
 }
